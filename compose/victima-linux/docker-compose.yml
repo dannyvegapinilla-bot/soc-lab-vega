@@ -1,0 +1,34 @@
+# Víctima Linux del SOC — Clase 2
+# Debe levantar en otro equipo solo con: docker network create + docker compose up -d
+services:
+  victima-linux:
+    image: ubuntu:24.04          # etiqueta FIJA: nunca latest (reproducibilidad)
+    container_name: victima-linux
+    hostname: victima-linux
+    command: ["sleep", "infinity"]  # PID 1 vivo; si no, el contenedor sale con código 0
+    networks: [soc-net]
+    ports:
+      - "2222:22"                # SSH del lab solo en el host (Clase 3)
+    cap_drop: ["ALL"]            # quita todas las capacidades del kernel
+    cap_add:                     # devuelve solo lo necesario
+      - CHOWN
+      - SETUID
+      - SETGID
+      - AUDIT_CONTROL            # auditd en Clase 3
+      - AUDIT_WRITE
+    security_opt:
+      - no-new-privileges:true   # bloquea escalada por binarios setuid
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g             # cgroups: que no congele soc-dos
+    volumes:
+      - victima-logs:/var/log    # los eventos de Clase 3 no se pierden al recrear
+
+volumes:
+  victima-logs:
+
+networks:
+  soc-net:
+    external: true               # ya existe; Compose NO la crea
