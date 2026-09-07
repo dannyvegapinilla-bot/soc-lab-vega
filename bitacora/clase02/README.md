@@ -50,3 +50,11 @@ Salida de `docker stats`:
 3. Montar `docker.sock` es casi root en el host: el contenedor puede crear otros contenedores privilegiados.
 4. `up` aplica el YAML; `start` no recrea si el descriptor cambió.
 5. El DNS de `soc-net` resuelve el nombre del servicio; la IP no es estable.
+
+## Preguntas de comprobación
+
+1. `latest` muda sin aviso: no puedes explicar ni reproducir lo que corre.
+2. `docker rm` sin volumen borra la capa de escritura: se pierde el dato.
+3. Montar `docker.sock` es casi root en el host.
+4. `up` aplica el YAML; `start` no recrea si el descriptor cambió.
+5. El DNS de `soc-net` resuelve el nombre del servicio; la IP no es estable.
