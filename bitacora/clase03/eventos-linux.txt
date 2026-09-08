@@ -1,0 +1,23 @@
+# Clase 3 — eventos Linux (victima-linux)
+# Provocado: SSH fallido usuario lab, clave incorrecta, 5+ veces
+# Host soc-dos: 2026-09-08 01:11 UTC
+# Dentro del contenedor: 2026-09-07 22:10–22:12 America/Santiago (−03)
+
+## lastb (btmp) — logins fallidos
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
+
+btmp begins Mon Sep  7 22:10:13 2026
+
+## auth.log
+2026-09-07T22:12:50.172842-03:00 victima-linux sshd[404]: Failed password for lab from 172.28.0.1 port 45268 ssh2
+2026-09-07T22:12:54.111193-03:00 victima-linux sshd[404]: message repeated 2 times: [ Failed password for lab from 172.28.0.1 port 45268 ssh2]
+2026-09-07T22:12:54.116043-03:00 victima-linux sshd[404]: Connection closed by authenticating user lab 172.28.0.1 port 45268 [preauth]
+2026-09-07T22:12:54.116313-03:00 victima-linux sshd[404]: error: cleanup_exit: kill(405): Operation not permitted

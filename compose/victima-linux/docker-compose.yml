@@ -1,34 +1,40 @@
-# Víctima Linux del SOC — Clase 2
-# Debe levantar en otro equipo solo con: docker network create + docker compose up -d
+# SYS_CHROOT: sshd necesita jaula (privsep). Sin esto cierra la conexión.
+# DAC_OVERRIDE/FOWNER: apt. NET_BIND_SERVICE: puerto 22.
+# seccomp unconfined: auditctl (documentado; no es --privileged).
 services:
   victima-linux:
-    image: ubuntu:24.04          # etiqueta FIJA: nunca latest (reproducibilidad)
+    image: victima-linux-lab:clase03
     container_name: victima-linux
     hostname: victima-linux
-    command: ["sleep", "infinity"]  # PID 1 vivo; si no, el contenedor sale con código 0
+    command: ["sleep", "infinity"]
     networks: [soc-net]
     ports:
-      - "2222:22"                # SSH del lab solo en el host (Clase 3)
-    cap_drop: ["ALL"]            # quita todas las capacidades del kernel
-    cap_add:                     # devuelve solo lo necesario
+      - "2222:22"
+    cap_drop: ["ALL"]
+    cap_add:
       - CHOWN
       - SETUID
       - SETGID
-      - AUDIT_CONTROL            # auditd en Clase 3
+      - AUDIT_CONTROL
       - AUDIT_WRITE
+      - DAC_OVERRIDE
+      - FOWNER
+      - NET_BIND_SERVICE
+      - SYS_CHROOT
     security_opt:
-      - no-new-privileges:true   # bloquea escalada por binarios setuid
+      - no-new-privileges:true
+      - seccomp:unconfined
     deploy:
       resources:
         limits:
           cpus: "1.0"
-          memory: 1g             # cgroups: que no congele soc-dos
+          memory: 1g
     volumes:
-      - victima-logs:/var/log    # los eventos de Clase 3 no se pierden al recrear
+      - victima-logs:/var/log
 
 volumes:
   victima-logs:
 
 networks:
   soc-net:
-    external: true               # ya existe; Compose NO la crea
+    external: true
