@@ -1,4 +1,5 @@
 # Clase 2 — Docker: base del laboratorio SOC
+## https://github.com/dannyvegapinilla-bot/soc-lab-vega
 
 ## Plataforma
 Ubuntu 24.04 en Proxmox (soc-dos). Docker Engine nativo. Red `soc-net` 172.28.0.0/16.
