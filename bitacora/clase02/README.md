@@ -108,7 +108,3 @@ up mira el descriptor y deja el estado real igual al YAML (crea, recrea si cambi
 Porque la IP del contenedor cambia al recrearlo (alpine-a resolvió 172.28.0.2 esa vez; la siguiente puede ser otra). El DNS de soc-net resuelve el nombre del servicio (wazuh.manager) y la conexión no se rompe.
 
 ---
-
-## Trazabilidad
-
-Repo privado, git push a main. Sin push no está entregado. El .gitignore evita .env, claves y certificados.
