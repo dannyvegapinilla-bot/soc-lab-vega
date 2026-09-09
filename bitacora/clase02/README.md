@@ -1,61 +1,67 @@
-# Clase 2 — Docker: base del laboratorio SOC
-## https://github.com/dannyvegapinilla-bot/soc-lab-vega
+# Clase 2 — Docker, la base del laboratorio
 
-## Plataforma
-Ubuntu 24.04 en Proxmox (soc-dos). Docker Engine nativo. Red `soc-net` 172.28.0.0/16.
+Repo: https://github.com/dannyvegapinilla-bot/soc-lab-vega
+Maquina: Ubuntu 24.04 en Proxmox (soc-dos), Docker Engine nativo.
+Entregable: compose/victima-linux/docker-compose.yml
 
-## Fase 1 — Comandos (contenedor demo nginx)
+Esta bitacora sigue la rubrica (100 puntos). Escribi lo que hice y por que, no una copia del PDF.
+Capturas en esta carpeta: Fase-3.PNG, Fase-3-1.PNG, Fase-4.PNG.
 
-| Comando | Para qué | Qué vi |
-|---------|----------|--------|
-| `docker run -d --name demo -p 8080:80 nginx:alpine` | Crear y dejar el proceso en segundo plano | Contenedor Up, 8080->80 |
-| `docker ps` | Qué está corriendo | `demo` con nginx:alpine |
-| `docker logs demo` | Salida del PID 1 (diagnóstico) | nginx ready; en Clase 4 aquí se ve el indexador |
-| `docker exec -it demo sh -c "ls /usr/share/nginx/html"` | Entrar al namespace de archivos | `index.html` 50x.html |
-| `docker stats --no-stream` | CPU/RAM reales | ~8 MiB; sin limits del Compose |
-| `docker inspect demo \| grep -i ipaddress` | Metadatos / IP | 172.17.0.2 (bridge por defecto) |
-| `docker rm -f demo` | Destruir el contenedor | `ps -a` vacío; sin volumen se pierde todo |
+## 1. Compose (40 pts)
 
-`up` reconcilia el YAML y recrea si cambió. `start` solo reanuda contenedores ya creados. Tras editar Compose siempre `up`.
+El YAML esta en compose/victima-linux/docker-compose.yml.
+En otro equipo: crear la red soc-net (external: true, Compose no la crea) y docker compose up -d.
 
-## Fase 2 — Red y persistencia
+En soc-dos levanto con ubuntu:24.04 (nunca latest), sleep infinity, puerto 2222:22, limite 1 CPU y 1 GB, volumen victima-logs en /var/log.
 
-- `alpine-b` hizo ping a `alpine-a` por **nombre** (resolvió 172.28.0.2). Las IP cambian al recrear; por eso en Clase 5 el agente usará `wazuh.manager`.
-- Escribí `persiste` en `/datos` (volumen `lab-datos`), borré `alpine-a` y un contenedor nuevo leyó el mismo texto. El dato vive en el volumen, no en el contenedor.
+Lo que vi:
+victima-linux  ubuntu:24.04  sleep infinity  Up  0.0.0.0:2222->22/tcp
+MEM USAGE / LIMIT: 2.242MiB / 1GiB
 
-## Fase 3 — Compose victima-linux
+Ese 1GiB lo aplica Docker de verdad, no es un comentario. Antes probe nginx:alpine (demo) con run, ps, logs, exec, stats, inspect y rm. Al borrarlo, ps -a quedo vacio: sin volumen se pierde todo.
 
-`compose/victima-linux/docker-compose.yml` levantó con `ubuntu:24.04`, `sleep infinity`, puerto 2222.
+up reconcilia el YAML; start solo despierta lo ya creado. Si edito el archivo, siempre up.
 
-Salida de `docker compose ps`:
-- victima-linux Up, 0.0.0.0:2222->22/tcp
+## 2. Red y volumen (20 pts)
 
-Salida de `docker stats`:
-- MEM USAGE / LIMIT: 2.242MiB / 1GiB  (el tope de 1g está activo)
+Red soc-net 172.28.0.0/16: alpine-b hizo ping a alpine-a por NOMBRE (resolvio 172.28.0.2). Las IP cambian al recrear; por eso el agente de la Clase 5 usara wazuh.manager.
 
-## Hardening (qué riesgo evita cada opción)
+Volumen lab-datos: escribi persiste en /datos, borre alpine-a y un contenedor nuevo leyo el mismo texto. El dato vive en el volumen. Por eso /var/log de la victima va a victima-logs.
 
-| Opción | Riesgo que evita |
-|--------|------------------|
-| `ubuntu:24.04` (no latest) | Que mañana baje otra versión y el lab deje de ser reproducible (15 % de la nota) |
-| `cap_drop: ALL` + `cap_add` puntual | Que un compromiso use capacidades de red/dispositivos/archivos del host. AUDIT_* es para auditd en Clase 3 |
-| `no-new-privileges:true` | Que un proceso sin privilegios escale a root via setuid |
-| `limits` 1 CPU / 1g | Que el contenedor coma toda la RAM de soc-dos (~10 GB en el host) |
-| volumen `victima-logs` | Perder `/var/log` al recrear el servicio (eventos de Clase 3) |
-| Nunca `--privileged` ni montar `docker.sock` | Entregar el host: el kernel es compartido |
+## 3. Fundamentacion (20 pts)
 
-## Preguntas de comprobación
+El kernel lo comparte el host. Si le doy de mas al contenedor, le doy soc-dos.
 
-1. `latest` muda sin aviso: no puedes explicar ni reproducir lo que corre.
-2. `docker rm` sin volumen borra la capa de escritura: se pierde el dato.
-3. Montar `docker.sock` es casi root en el host: el contenedor puede crear otros contenedores privilegiados.
-4. `up` aplica el YAML; `start` no recrea si el descriptor cambió.
-5. El DNS de `soc-net` resuelve el nombre del servicio; la IP no es estable.
+- ubuntu:24.04: que latest no cambie el lab de un dia para otro.
+- cap_drop ALL y cap_add puntual: que un compromiso no use red/discos/dueno de archivos del host. AUDIT_* es para auditd.
+- no-new-privileges: que un setuid no salte a root dentro del contenedor.
+- limits 1 CPU / 1g: que no se coma los 10 GB del Proxmox.
+- volumen en /var/log: no perder eventos al recrear.
+- Nunca --privileged ni docker.sock: el socket es casi root en el host.
 
-## Preguntas de comprobación
+Nota Clase 3: con solo las caps del PDF, apt y sshd fallaron. Sume DAC_OVERRIDE, FOWNER, NET_BIND_SERVICE y SYS_CHROOT, comentado en el YAML. No es privileged.
 
-1. `latest` muda sin aviso: no puedes explicar ni reproducir lo que corre.
-2. `docker rm` sin volumen borra la capa de escritura: se pierde el dato.
-3. Montar `docker.sock` es casi root en el host.
-4. `up` aplica el YAML; `start` no recrea si el descriptor cambió.
-5. El DNS de `soc-net` resuelve el nombre del servicio; la IP no es estable.
+## 4. Trazabilidad (20 pts)
+
+Repo privado soc-lab-vega, push a main. Mensajes utiles:
+- Clase 2: Compose de la victima Linux con limites y hardening
+- Clase 2: completar preguntas de comprobacion en bitacora
+
+gitignore bloquea .env, claves y certificados. Si no hice push, no esta entregado.
+
+## Preguntas al cerrar
+
+1. latest muda sin aviso; no puedo defender lo que bajo Docker Hub esa manana.
+2. docker rm sin volumen borra la capa de escritura.
+3. docker.sock permite levantar contenedores privilegiados y salir al host.
+4. up aplica el YAML; start no se entera si lo edite.
+5. Nombre, no IP: la de hoy no es la de manana.
+
+## Verificacion
+
+cd ~/soc-lab/compose/victima-linux
+docker compose ps
+docker compose config
+docker stats --no-stream victima-linux
+docker volume ls | grep victima
+docker network inspect soc-net
