@@ -38,7 +38,7 @@ Al borrar `demo` no quedó nada: **sin volumen, los archivos se van con el conte
 
 Creé `soc-net` (`172.28.0.0/16`) y el volumen `lab-datos`.
 
-**Red.** Dos Alpine en esa red. Desde `alpine-b` hice ping a **`alpine-a` por nombre** (resolvió `172.28.0.2`), no por IP. Las direcciones cambian al recrear el contenedor; por eso en la Clase 5 el agente apuntará a `wazuh.manager`. En `Fase-4.PNG` se ve `victima-linux` unida a `soc-net`.
+**Red.** Dos Alpine en esa red. Desde `alpine-b` hice ping a **`alpine-a` por nombre** (resolvió `172.28.0.2`), no por IP. Las direcciones cambian al recrear el contenedor;  En `Fase-4.PNG` se ve `victima-linux` unida a `soc-net`.
 
 **Persistencia (paso a paso):**
 
@@ -85,8 +85,6 @@ De Fase-3-1.PNG:
     21712bcdae30   victima-linux   0.00%   408KiB / 1GiB       0.04%
 
 El 1GiB está aplicado (no es un comentario). En Fase-4.PNG: compose config válido, volumen victima-linux_victima-logs, contenedor en soc-net.
-
-Nota: con solo las caps del PDF, en Clase 3 apt y sshd fallaron. Añadí DAC_OVERRIDE, FOWNER, NET_BIND_SERVICE y SYS_CHROOT (comentarios en Fase-3.PNG). No es --privileged.
 
 ---
 
