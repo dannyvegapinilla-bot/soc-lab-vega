@@ -1,23 +1,127 @@
-# Clase 3 — eventos Linux (victima-linux)
-# Provocado: SSH fallido usuario lab, clave incorrecta, 5+ veces
-# Host soc-dos: 2026-09-08 01:11 UTC
-# Dentro del contenedor: 2026-09-07 22:10–22:12 America/Santiago (−03)
+# Clase 3 — eventos Linux
+# Contenedor SSH: 2026-09-14 11:14 -03 / host 14:14 UTC
+# VM auditd: 2026-09-14 14:24 UTC — auid=dvega, useradd intruso
 
-## lastb (btmp) — logins fallidos
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:12 - 22:12  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:11 - 22:11  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
-lab      ssh:notty    172.28.0.1       Mon Sep  7 22:10 - 22:10  (00:00)
+## lastb (contenedor)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Mon Sep 14 11:14 - 11:14  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:50 - 12:50  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:47 - 12:47  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:47 - 12:47  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:47 - 12:47  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:47 - 12:47  (00:00)
+lab      ssh:notty    172.28.0.1       Wed Sep  9 12:47 - 12:47  (00:00)
 
-btmp begins Mon Sep  7 22:10:13 2026
-
-## auth.log
+## auth.log (contenedor)
 2026-09-07T22:12:50.172842-03:00 victima-linux sshd[404]: Failed password for lab from 172.28.0.1 port 45268 ssh2
 2026-09-07T22:12:54.111193-03:00 victima-linux sshd[404]: message repeated 2 times: [ Failed password for lab from 172.28.0.1 port 45268 ssh2]
 2026-09-07T22:12:54.116043-03:00 victima-linux sshd[404]: Connection closed by authenticating user lab 172.28.0.1 port 45268 [preauth]
 2026-09-07T22:12:54.116313-03:00 victima-linux sshd[404]: error: cleanup_exit: kill(405): Operation not permitted
+2026-09-14T11:14:21.579059-03:00 victima-linux sshd[51460]: Failed password for lab from 172.28.0.1 port 59774 ssh2
+2026-09-14T11:14:24.299115-03:00 victima-linux sshd[51460]: message repeated 2 times: [ Failed password for lab from 172.28.0.1 port 59774 ssh2]
+2026-09-14T11:14:24.304061-03:00 victima-linux sshd[51460]: Connection closed by authenticating user lab 172.28.0.1 port 59774 [preauth]
+2026-09-14T11:14:24.304292-03:00 victima-linux sshd[51460]: error: cleanup_exit: kill(51461): Operation not permitted
+2026-09-14T11:14:36.211727-03:00 victima-linux sshd[51474]: Failed password for lab from 172.28.0.1 port 45416 ssh2
+2026-09-14T11:14:40.914848-03:00 victima-linux sshd[51474]: message repeated 2 times: [ Failed password for lab from 172.28.0.1 port 45416 ssh2]
+2026-09-14T11:14:40.919499-03:00 victima-linux sshd[51474]: Connection closed by authenticating user lab 172.28.0.1 port 45416 [preauth]
+2026-09-14T11:14:40.919815-03:00 victima-linux sshd[51474]: error: cleanup_exit: kill(51475): Operation not permitted
+2026-09-14T11:14:51.107866-03:00 victima-linux sshd[51477]: Failed password for lab from 172.28.0.1 port 51598 ssh2
+2026-09-14T11:14:53.587225-03:00 victima-linux sshd[51477]: message repeated 2 times: [ Failed password for lab from 172.28.0.1 port 51598 ssh2]
+2026-09-14T11:14:53.591828-03:00 victima-linux sshd[51477]: Connection closed by authenticating user lab 172.28.0.1 port 51598 [preauth]
+2026-09-14T11:14:53.592066-03:00 victima-linux sshd[51477]: error: cleanup_exit: kill(51478): Operation not permitted
+
+## ausearch identidad (VM)
+type=PATH msg=audit(14/09/26 14:24:55.161:9147) : item=0 name=/etc/shadow inode=657068 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:24:55.161:9147) : cwd=/root 
+type=SYSCALL msg=audit(14/09/26 14:24:55.161:9147) : arch=x86_64 syscall=openat success=yes exit=10 a0=AT_FDCWD a1=0x59b24c742be0 a2=O_RDWR|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW a3=0x0 items=1 ppid=52512 pid=52525 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=useradd exe=/usr/sbin/useradd subj=unconfined key=identidad 
+----
+type=PROCTITLE msg=audit(14/09/26 14:24:55.162:9150) : proctitle=useradd -m -s /bin/bash intruso 
+type=PATH msg=audit(14/09/26 14:24:55.162:9150) : item=4 name=/etc/passwd inode=657088 dev=fc:00 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.162:9150) : item=3 name=/etc/passwd inode=657089 dev=fc:00 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.162:9150) : item=2 name=/etc/passwd+ inode=657088 dev=fc:00 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.162:9150) : item=1 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.162:9150) : item=0 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:24:55.162:9150) : cwd=/root 
+type=SYSCALL msg=audit(14/09/26 14:24:55.162:9150) : arch=x86_64 syscall=rename success=yes exit=0 a0=0x7ffcc8f93490 a1=0x59b24c743040 a2=0x7ffcc8f93400 a3=0x100 items=5 ppid=52512 pid=52525 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=useradd exe=/usr/sbin/useradd subj=unconfined key=identidad 
+----
+type=PROCTITLE msg=audit(14/09/26 14:24:55.163:9151) : proctitle=useradd -m -s /bin/bash intruso 
+type=PATH msg=audit(14/09/26 14:24:55.163:9151) : item=4 name=/etc/shadow inode=657089 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.163:9151) : item=3 name=/etc/shadow inode=657068 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.163:9151) : item=2 name=/etc/shadow+ inode=657089 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.163:9151) : item=1 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:24:55.163:9151) : item=0 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:24:55.163:9151) : cwd=/root 
+type=SYSCALL msg=audit(14/09/26 14:24:55.163:9151) : arch=x86_64 syscall=rename success=yes exit=0 a0=0x7ffcc8f93490 a1=0x59b24c742be0 a2=0x7ffcc8f93400 a3=0x100 items=5 ppid=52512 pid=52525 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=useradd exe=/usr/sbin/useradd subj=unconfined key=identidad 
+----
+type=PROCTITLE msg=audit(14/09/26 14:26:07.169:9185) : proctitle=chpasswd 
+type=PATH msg=audit(14/09/26 14:26:07.169:9185) : item=4 name=/etc/shadow inode=656054 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:26:07.169:9185) : item=3 name=/etc/shadow inode=657089 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:26:07.169:9185) : item=2 name=/etc/nshadow inode=656054 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:26:07.169:9185) : item=1 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:26:07.169:9185) : item=0 name=/etc/ inode=655361 dev=fc:00 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:26:07.169:9185) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=SYSCALL msg=audit(14/09/26 14:26:07.169:9185) : arch=x86_64 syscall=rename success=yes exit=0 a0=0x7cd6b831a3d8 a1=0x7cd6b831a12d a2=0x5602fc9d1c19 a3=0x56079ce492a0 items=5 ppid=52543 pid=52544 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=chpasswd exe=/usr/sbin/chpasswd subj=unconfined key=identidad 
+----
+type=PROCTITLE msg=audit(14/09/26 14:26:07.178:9197) : proctitle=usermod -aG sudo lab 
+type=PATH msg=audit(14/09/26 14:26:07.178:9197) : item=0 name=/etc/passwd inode=657088 dev=fc:00 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:26:07.178:9197) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=SYSCALL msg=audit(14/09/26 14:26:07.178:9197) : arch=x86_64 syscall=openat success=yes exit=5 a0=AT_FDCWD a1=0x57b0716b12a0 a2=O_RDWR|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW a3=0x0 items=1 ppid=52548 pid=52549 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=usermod exe=/usr/sbin/usermod subj=unconfined key=identidad 
+----
+type=PROCTITLE msg=audit(14/09/26 14:26:07.179:9198) : proctitle=usermod -aG sudo lab 
+type=PATH msg=audit(14/09/26 14:26:07.179:9198) : item=0 name=/etc/shadow inode=656054 dev=fc:00 mode=file,640 ouid=root ogid=shadow rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:26:07.179:9198) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=SYSCALL msg=audit(14/09/26 14:26:07.179:9198) : arch=x86_64 syscall=openat success=yes exit=6 a0=AT_FDCWD a1=0x57b0716b1fc0 a2=O_RDWR|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW a3=0x0 items=1 ppid=52548 pid=52549 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=usermod exe=/usr/sbin/usermod subj=unconfined key=identidad 
+
+## ausearch exec_root (VM)
+type=PATH msg=audit(14/09/26 14:29:21.062:9238) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:29:21.062:9238) : item=0 name=/usr/bin/sudo inode=1587259 dev=fc:00 mode=file,suid,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:29:21.062:9238) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:29:21.062:9238) : argc=3 a0=sudo a1=cat a2=/etc/audit/rules.d/soc.rules 
+type=SYSCALL msg=audit(14/09/26 14:29:21.062:9238) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5faf97f833f0 a1=0x5faf97f5b010 a2=0x5faf97f1e9a0 a3=0x5faf97f5b010 items=2 ppid=50890 pid=52583 auid=dvega uid=dvega gid=dvega euid=root suid=root fsuid=root egid=dvega sgid=dvega fsgid=dvega tty=pts0 ses=1992 comm=sudo exe=/usr/bin/sudo subj=unconfined key=exec_root 
+----
+type=PROCTITLE msg=audit(14/09/26 14:29:21.068:9243) : proctitle=cat /etc/audit/rules.d/soc.rules 
+type=PATH msg=audit(14/09/26 14:29:21.068:9243) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:29:21.068:9243) : item=0 name=/usr/bin/cat inode=1593058 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:29:21.068:9243) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:29:21.068:9243) : argc=2 a0=cat a1=/etc/audit/rules.d/soc.rules 
+type=SYSCALL msg=audit(14/09/26 14:29:21.068:9243) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5cb1d5f79ae8 a1=0x5cb1d5f88e30 a2=0x5cb1d5f95400 a3=0x64 items=2 ppid=52584 pid=52585 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=cat exe=/usr/bin/cat subj=unconfined key=exec_root 
+----
+type=PROCTITLE msg=audit(14/09/26 14:35:56.480:9255) : proctitle=sudo ausearch -k identidad -i 
+type=PATH msg=audit(14/09/26 14:35:56.480:9255) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:35:56.480:9255) : item=0 name=/usr/bin/sudo inode=1587259 dev=fc:00 mode=file,suid,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:35:56.480:9255) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:35:56.480:9255) : argc=5 a0=sudo a1=ausearch a2=-k a3=identidad a4=-i 
+type=SYSCALL msg=audit(14/09/26 14:35:56.480:9255) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5faf97f839e0 a1=0x5faf97f88130 a2=0x5faf97f1e9a0 a3=0x8 items=2 ppid=50890 pid=52655 auid=dvega uid=dvega gid=dvega euid=root suid=root fsuid=root egid=dvega sgid=dvega fsgid=dvega tty=pts0 ses=1992 comm=sudo exe=/usr/bin/sudo subj=unconfined key=exec_root 
+----
+type=PROCTITLE msg=audit(14/09/26 14:35:56.484:9260) : proctitle=ausearch -k identidad -i 
+type=PATH msg=audit(14/09/26 14:35:56.484:9260) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:35:56.484:9260) : item=0 name=/usr/sbin/ausearch inode=1574369 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:35:56.484:9260) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:35:56.484:9260) : argc=4 a0=ausearch a1=-k a2=identidad a3=-i 
+type=SYSCALL msg=audit(14/09/26 14:35:56.484:9260) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x556868776478 a1=0x55686876ae30 a2=0x5568687793c0 a3=0x64 items=2 ppid=52657 pid=52658 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=ausearch exe=/usr/sbin/ausearch subj=unconfined key=exec_root 
+----
+type=PROCTITLE msg=audit(14/09/26 14:35:56.488:9263) : proctitle=sudo ausearch -k exec_root -i 
+type=PATH msg=audit(14/09/26 14:35:56.488:9263) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:35:56.488:9263) : item=0 name=/usr/bin/sudo inode=1587259 dev=fc:00 mode=file,suid,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:35:56.488:9263) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:35:56.488:9263) : argc=5 a0=sudo a1=ausearch a2=-k a3=exec_root a4=-i 
+type=SYSCALL msg=audit(14/09/26 14:35:56.488:9263) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5faf97f839e0 a1=0x5faf97f88130 a2=0x5faf97f1e9a0 a3=0x8 items=2 ppid=50890 pid=52659 auid=dvega uid=dvega gid=dvega euid=root suid=root fsuid=root egid=dvega sgid=dvega fsgid=dvega tty=pts0 ses=1992 comm=sudo exe=/usr/bin/sudo subj=unconfined key=exec_root 
+----
+type=PROCTITLE msg=audit(14/09/26 14:35:56.492:9268) : proctitle=ausearch -k exec_root -i 
+type=PATH msg=audit(14/09/26 14:35:56.492:9268) : item=1 name=/lib64/ld-linux-x86-64.so.2 inode=1586208 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(14/09/26 14:35:56.492:9268) : item=0 name=/usr/sbin/ausearch inode=1574369 dev=fc:00 mode=file,755 ouid=root ogid=root rdev=00:00 nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=CWD msg=audit(14/09/26 14:35:56.492:9268) : cwd=/home/dvega/soc-lab/compose/victima-linux 
+type=EXECVE msg=audit(14/09/26 14:35:56.492:9268) : argc=4 a0=ausearch a1=-k a2=exec_root a3=-i 
+type=SYSCALL msg=audit(14/09/26 14:35:56.492:9268) : arch=x86_64 syscall=execve success=yes exit=0 a0=0x5609a7b9e478 a1=0x5609a7b92e30 a2=0x5609a7ba13c0 a3=0x64 items=2 ppid=52661 pid=52662 auid=dvega uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=1992 comm=ausearch exe=/usr/sbin/ausearch subj=unconfined key=exec_root 
