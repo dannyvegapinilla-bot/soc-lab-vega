@@ -7,3 +7,4 @@ credenciales*
 config/*_certs/
 *.log
 *.tmp
+wazuh-docker/
