@@ -1,0 +1,23 @@
+services:
+  gvm:
+    image: immauss/openvas:26.07.27.01-slim
+    container_name: gvm
+    ports:
+      - "9392:9392"
+    environment:
+      - USERNAME=admin
+      - SKIPSYNC=true
+    volumes:
+      - gvm-data:/data
+    restart: "no"
+    networks:
+      - soc-net
+    deploy:
+      resources:
+        limits:
+          memory: 4g
+volumes:
+  gvm-data:
+networks:
+  soc-net:
+    external: true
